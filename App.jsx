@@ -1,38 +1,34 @@
 import Header from "./components/Header";
 import Entry from "./components/Entry";
+import myData from "./data";
 
 /**
- * Challenge: pass props to the Entry component to display
- * its data. See the `data.md` file for each prop name and its
- * value.
- *
- * Then on the Entry component, receive and display the values
- * for those props. In the end, the page should look the same
- * as it does now, but without all the hard-coded data in the
- * component
+ * Challenge:
+ * - import the array of data from data.js
+ * - map over the array to create an <Entry /> component
+ *   for every item in the data array.
+ * - display the array of Entry components in place of the current
+ *   hard-coded <Entry /> instance.
  */
 
 export default function App() {
+  const entryElements = myData.map((article) => {
+    return (
+      <Entry
+        img={article.img}
+        title={article.title}
+        country={article.country}
+        googleMapsLink={article.googleMapsLink}
+        dates={article.dates}
+        text={article.text}
+      />
+    );
+  });
+
   return (
     <>
       <Header />
-      <main className="container">
-        <Entry
-          mainImg={{
-            src: "https://scrimba.com/links/travel-journal-japan-image-url",
-            alt: "Mount Fuji",
-          }}
-          markerImg={{
-            src: "./images/marker.png",
-            alt: "Marker image",
-          }}
-          title="Mount Fuji"
-          country="Japan"
-          googleMapsLink="https://www.google.com/maps/place/Mount+Fuji/@35.3606421,138.7170637,15z/data=!3m1!4b1!4m6!3m5!1s0x6019629a42fdc899:0xa6a1fcc916f3a4df!8m2!3d35.3606255!4d138.7273634!16zL20vMGNrczA?entry=ttu"
-          dates="12 Jan, 2021 - 24 Jan, 2021"
-          text="Mount Fuji is the tallest mountain in Japan, standing at 3,776 meters (12,380 feet). Mount Fuji is the single most popular tourist site in Japan, for both Japanese and foreign tourists."
-        />
-      </main>
+      <main className="container">{entryElements}</main>
     </>
   );
 }
