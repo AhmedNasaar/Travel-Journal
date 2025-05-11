@@ -1,34 +1,24 @@
-import Header from "./components/Header";
-import Entry from "./components/Entry";
-import myData from "./data";
-
-/**
- * Challenge:
- * - import the array of data from data.js
- * - map over the array to create an <Entry /> component
- *   for every item in the data array.
- * - display the array of Entry components in place of the current
- *   hard-coded <Entry /> instance.
- */
+import Header from "./components/Header"
+import Entry from "./components/Entry"
+import data from "./data"
 
 export default function App() {
-  const entryElements = myData.map((article) => {
+    
+    const entryElements = data.map((entry) => {
+        return (
+            <Entry
+                key={entry.id}
+                {...entry} //? I add it instead of calling every prop, So that will call every prop in data.js
+            />
+        )
+    })
+    
     return (
-      <Entry
-        img={article.img}
-        title={article.title}
-        country={article.country}
-        googleMapsLink={article.googleMapsLink}
-        dates={article.dates}
-        text={article.text}
-      />
-    );
-  });
-
-  return (
-    <>
-      <Header />
-      <main className="container">{entryElements}</main>
-    </>
-  );
+        <>
+            <Header />
+            <main className="container">
+                {entryElements}
+            </main>
+        </>
+    )
 }
